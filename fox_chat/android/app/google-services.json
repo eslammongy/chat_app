@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "159735921963",
+    "project_id": "foxchat-17e84",
+    "storage_bucket": "foxchat-17e84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159735921963:android:d60a291d36c54b0692596e",
+        "android_client_info": {
+          "package_name": "com.example.fox_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159735921963-uemhcrqtg41e900r5fh98ouhb1u2i5mt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fox_chat",
+            "certificate_hash": "66eb660562974f0999620cad42f527d7e60b4f91"
+          }
+        },
+        {
+          "client_id": "159735921963-heluu13440up8qe239mknrfko921504e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOK38cJbNYnhwdc2d7R_sknNAtr_0y3wg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159735921963-heluu13440up8qe239mknrfko921504e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

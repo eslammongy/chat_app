@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fox_chat/bloc/baseBlock/base_cubit.dart';
 import 'package:fox_chat/bloc/baseBlock/base_status.dart';
+import 'package:fox_chat/module/users/edit_profile.dart';
 import 'package:fox_chat/style/icon_broken.dart';
+import 'package:fox_chat/widgets/componant.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -210,7 +212,9 @@ class SettingScreen extends StatelessWidget {
                     width: 10,
                   ),
                   OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        navigateTo(context, EditUserProfile());
+                      },
                       child: Icon(
                         IconBroken.Edit,
                         color: Colors.red,

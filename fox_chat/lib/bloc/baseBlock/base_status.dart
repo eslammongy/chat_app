@@ -14,3 +14,21 @@ class BaseGetUserErrorsStatus extends BaseUserSatatus {
 class BaseChangeBottomBarPageStatus extends BaseUserSatatus {}
 
 class BaseAddNewPostStatus extends BaseUserSatatus {}
+
+class ChangeUserProfileImageStatus extends BaseUserSatatus {}
+
+class ChangeUserProfileImageErrorStatus extends BaseUserSatatus {}
+
+class ChangeUserCoverImageStatus extends BaseUserSatatus {}
+
+class UploadUserProfileImageSuccessStatus extends BaseUserSatatus {}
+
+class UploadUserProfileImageErrorStatus extends BaseUserSatatus {}
+
+class UploadUserCoverImageSuccessStatus extends BaseUserSatatus {}
+
+class UploadUserCoverImageErrorStatus extends BaseUserSatatus {}
+
+class UpdateUserDataErrorState extends BaseUserSatatus {}
+
+class UpdateUserDataLoadingState extends BaseUserSatatus {}

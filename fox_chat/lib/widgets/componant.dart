@@ -51,3 +51,24 @@ Color setToastColor({ToastColor toastColor}) {
 //     }
 //   });
 // }
+
+customButton(
+  Function onPress,
+  String text,
+  double width,
+) =>
+    Container(
+      width: width,
+      child: MaterialButton(
+          padding: EdgeInsets.all(12),
+          color: Colors.deepPurple,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          onPressed: onPress,
+          child: Text(
+            text,
+            style: TextStyle(
+                fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white),
+            textAlign: TextAlign.center,
+          )),
+    );

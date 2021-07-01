@@ -3,6 +3,10 @@ class UserModel {
   String email;
   String phone;
   String uId;
+  String bio;
+  String image;
+  String cover;
+  String password;
   bool isEmailVerified;
 
   UserModel({
@@ -10,6 +14,10 @@ class UserModel {
     this.name,
     this.phone,
     this.uId,
+    this.image,
+    this.bio,
+    this.cover,
+    this.password,
     this.isEmailVerified,
   });
 
@@ -18,6 +26,10 @@ class UserModel {
     name = json['name'];
     phone = json['phone'];
     uId = json['uId'];
+    image = json['image'];
+    cover = json['cover'];
+    bio = json['bio'];
+    password = json['password'];
     isEmailVerified = json['isEmailVerified'];
   }
 
@@ -27,6 +39,10 @@ class UserModel {
       'email': email,
       'phone': phone,
       'uId': uId,
+      'image': image,
+      'bio': bio,
+      'cover': cover,
+      'password': password,
       'isEmailVerified': isEmailVerified,
     };
   }

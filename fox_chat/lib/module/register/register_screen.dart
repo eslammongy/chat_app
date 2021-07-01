@@ -25,7 +25,7 @@ class RegisterScreen extends StatelessWidget {
           if (state is CreateUserSuccessState) {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => LoginScreen()),
                 (route) => false);
           }
         }, builder: (context, state) {

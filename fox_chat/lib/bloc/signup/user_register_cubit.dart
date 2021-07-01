@@ -24,11 +24,11 @@ class UserRegisterCubit extends Cubit<UserRegisterStates> {
         .then((value) {
       //  print(value.user.email);
       createNewUser(
-        uId: value.user.uid,
-        name: name,
-        phone: phone,
-        email: email,
-      );
+          uId: value.user.uid,
+          name: name,
+          phone: phone,
+          email: email,
+          password: password);
       //emit(UserRegisterSuccessState());
     }).catchError((onError) {
       print(onError.toString());
@@ -40,12 +40,17 @@ class UserRegisterCubit extends Cubit<UserRegisterStates> {
       {@required String name,
       @required String phone,
       @required String email,
+      @required String password,
       @required String uId}) {
     UserModel userModel = UserModel(
         name: name,
         email: email,
         phone: phone,
         uId: uId,
+        bio: "Write anything about you..",
+        image:
+            "https://img2.pngio.com/man-user-avatar-profile-people-icon-person-icon-flat-png-512_512.png",
+        password: password,
         isEmailVerified: false);
     FirebaseFirestore.instance
         .collection('users')

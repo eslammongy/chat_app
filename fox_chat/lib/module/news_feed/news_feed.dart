@@ -1,62 +1,83 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fox_chat/bloc/baseBlock/base_cubit.dart';
+import 'package:fox_chat/bloc/baseBlock/base_status.dart';
+import 'package:fox_chat/model/post_model.dart';
 import 'package:fox_chat/style/icon_broken.dart';
 import 'package:fox_chat/widgets/componant.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:http/http.dart';
 
 class NewsFeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(6),
-            width: double.infinity,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              color: HexColor("2A3B90"),
-              elevation: 10,
-              child:
-                  Stack(alignment: AlignmentDirectional.bottomEnd, children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image(
-                    image: NetworkImage(
-                        "https://emirateswoman.com/wp-content/uploads/2019/04/mo-salah.jpg"),
-                    fit: BoxFit.cover,
-                    height: 200,
+    return BlocConsumer<BaseUserCubit, BaseUserSatatus>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return ConditionalBuilder(
+            condition: BaseUserCubit.get(context).posts.length > 0 &&
+                BaseUserCubit.get(context).userModel != null,
+            builder: (context) => SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(6),
+                    width: double.infinity,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      color: HexColor("2A3B90"),
+                      elevation: 10,
+                      child: Stack(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image(
+                                image: NetworkImage(
+                                    "https://emirateswoman.com/wp-content/uploads/2019/04/mo-salah.jpg"),
+                                fit: BoxFit.cover,
+                                height: 200,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                "Make Your NetWork",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ]),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "Mo Salah",
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  ),
-                ),
-              ]),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => buildPostCard(
+                        BaseUserCubit.get(context).posts[index],
+                        context,
+                        index),
+                    itemCount: BaseUserCubit.get(context).posts.length,
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 8,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => buildPostCard(),
-            itemCount: 10,
-            separatorBuilder: (context, index) => SizedBox(
-              height: 8,
+            fallback: (context) => Center(
+              child: CircularProgressIndicator(),
             ),
-          )
-        ],
-      ),
-    );
+          );
+        });
   }
 
-  Widget buildPostCard() {
+  Widget buildPostCard(PostModel postModel, BuildContext context, index) {
     return Card(
         margin: EdgeInsets.symmetric(horizontal: 10),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -69,12 +90,14 @@ class NewsFeedScreen extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    radius: 35.0,
-                    backgroundImage: NetworkImage(
-                        "https://emirateswoman.com/wp-content/uploads/2019/04/mo-salah.jpg"),
+                    radius: 30.0,
+                    backgroundImage: NetworkImage("${postModel.image}"),
                   ),
                   SizedBox(
                     width: 15,
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Expanded(
                       child: Column(
@@ -83,7 +106,7 @@ class NewsFeedScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "Mo Salah",
+                            "${postModel.name}",
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
@@ -101,7 +124,7 @@ class NewsFeedScreen extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        "Jan 26 , 20 at 11:00 pm",
+                        "${postModel.dateTime}",
                         style: TextStyle(
                             fontSize: 10,
                             height: 1.3,
@@ -114,17 +137,17 @@ class NewsFeedScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
               Container(
                 child: Text(
-                  "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                  "${postModel.postText}",
                   style: TextStyle(
                       fontSize: 15,
-                      height: 1.3,
                       fontWeight: FontWeight.w500,
                       color: Colors.grey[200]),
                 ),
+                //alignment: AlignmentGeometry.lerp(a, b, t),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 6, top: 5),
@@ -143,7 +166,7 @@ class NewsFeedScreen extends StatelessWidget {
                               child: Text(
                                 "#software",
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.indigo[900]),
                               )),
@@ -153,23 +176,19 @@ class NewsFeedScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                color: HexColor("2A6B90"),
-                elevation: 0,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image(
-                    fit: BoxFit.fill,
-                    width: double.infinity,
-                    height: 140,
-                    image: NetworkImage(
-                        "https://emirateswoman.com/wp-content/uploads/2019/04/mo-salah.jpg"),
+              if (postModel.postImage != '')
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image(
+                      fit: BoxFit.fill,
+                      width: double.infinity,
+                      height: 140,
+                      image: NetworkImage("${postModel.postImage}"),
+                    ),
                   ),
                 ),
-              ),
               Row(children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -185,7 +204,7 @@ class NewsFeedScreen extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  "120",
+                  '${BaseUserCubit.get(context).likes[index]}',
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
@@ -218,7 +237,7 @@ class NewsFeedScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 20.0,
                     backgroundImage: NetworkImage(
-                        "https://emirateswoman.com/wp-content/uploads/2019/04/mo-salah.jpg"),
+                        "${BaseUserCubit.get(context).userModel.image}"),
                   ),
                   SizedBox(
                     width: 15,
@@ -247,7 +266,10 @@ class NewsFeedScreen extends StatelessWidget {
                               IconBroken.Heart,
                               color: Colors.amber,
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              BaseUserCubit.get(context).likedPosts(
+                                  BaseUserCubit.get(context).postID[index]);
+                            },
                           ),
                         ),
                         Text(

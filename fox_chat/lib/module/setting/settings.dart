@@ -64,7 +64,7 @@ class SettingScreen extends StatelessWidget {
                     color: Colors.white),
               ),
               Text(
-                "bio ....",
+                "${userModel.bio}",
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,

@@ -30,7 +30,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BaseUserCubit()..getUserDate(),
+      create: (context) => BaseUserCubit()
+        ..getUserDate()
+        ..getPosts(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

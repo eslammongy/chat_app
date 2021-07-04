@@ -60,3 +60,24 @@ class GetLikePostsErrorState extends BaseUserSatatus {
   final String error;
   GetLikePostsErrorState({this.error});
 }
+
+// get all user in chat layout
+
+class BaseGetAllUserSuccessStatus extends BaseUserSatatus {}
+
+class BaseGetAllUserLoadingStatus extends BaseUserSatatus {}
+
+class BaseGetAllUserErrorsStatus extends BaseUserSatatus {
+  final String error;
+  BaseGetAllUserErrorsStatus({this.error});
+}
+
+// send and get message status
+
+class SendMessageSuccessState extends BaseUserSatatus {}
+
+class SendMessageErrorState extends BaseUserSatatus {}
+
+class GetMessageSuccessState extends BaseUserSatatus {}
+
+class GetMessageErrorState extends BaseUserSatatus {}

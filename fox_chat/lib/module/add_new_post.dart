@@ -62,7 +62,7 @@ class AddNewPostScreen extends StatelessWidget {
                     CircleAvatar(
                       radius: 35.0,
                       backgroundImage: NetworkImage(
-                          "https://emirateswoman.com/wp-content/uploads/2019/04/mo-salah.jpg"),
+                          "${BaseUserCubit.get(context).userModel.image}"),
                     ),
                     SizedBox(
                       width: 15,
@@ -71,7 +71,7 @@ class AddNewPostScreen extends StatelessWidget {
                         child: Row(
                       children: [
                         Text(
-                          "Mo Salah",
+                          "${BaseUserCubit.get(context).userModel.name}",
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,

@@ -235,7 +235,7 @@ class NewsFeedScreen extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    radius: 20.0,
+                    radius: 15.0,
                     backgroundImage: NetworkImage(
                         "${BaseUserCubit.get(context).userModel.image}"),
                   ),
